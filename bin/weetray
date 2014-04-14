@@ -1,0 +1,21 @@
+#!/bin/bash
+screen -wipe
+if (screen -ls | grep wee | grep Attached); then
+  echo "already running, focusing the window with xdotool"
+  xdotool search weetray windowactivate
+elif (screen -ls | grep wee | grep Detached); then
+  echo "already running, attaching with screen -r"
+  exec 3<>/dev/tcp/localhost/5008  # 2>/dev/null
+  echo -n "start" >&3
+  screen -r wee
+else
+  /usr/share/weetray/gtk-blink-icon_socket.py &
+  # Latter command just won't start gtk-blink..py if the tcp address is still in use, thus there will be only one process of it
+  # Now we call a python script which sends gtk-blink...py a message to ensure that the icon is switched to green-tray.png
+  sleep 1
+  exec 3<>/dev/tcp/localhost/5008
+  echo -n "start" >&3
+  sleep 1
+  screen -dmS wee weechat 
+  /usr/bin/weetray-icon
+fi

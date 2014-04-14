@@ -1,0 +1,2 @@
+#!/bin/bash
+/usr/bin/echo 'IRC' | /usr/bin/osd_cat -O 9 -u blue -f '-*-gadugi-*-*-*-*-20-*-*-*-*-*-*-*' -c white -o 0 -s 2 -S white -A center -p top -d 4
