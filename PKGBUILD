@@ -8,6 +8,7 @@ depends=("xosd" "weechat" "python2" "twisted" "pygtk" "python2-wnck" "xdotool" "
 makedepends=('git')
 source=("${pkgname}-${pkgver}"::'git://github.com/eayin2/weetray.git')
 md5sums=('SKIP')
+install='weetray.install'
 
 pkgver() {
   cd "${srcdir}/${pkgname}-${pkgver}"

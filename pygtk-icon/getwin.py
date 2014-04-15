@@ -4,6 +4,8 @@ import wnck
 import glib
 import sys
 from twisted.internet import reactor, protocol as p
+conf = {}
+execfile("/usr/share/weetray/weetray.conf", conf)
 
 
 class EchoClient(p.Protocol):
@@ -35,7 +37,7 @@ class WindowTitle(object):
             title = wnck.screen_get_default().get_active_window().get_name()
             if self.title != title:
                 if "weetray" in str(title):
-                    reactor.connectTCP('localhost', 5008, EchoClientFactory('stop'))
+                    reactor.connectTCP('localhost', conf["socket_port"], EchoClientFactory('stop'))
                     reactor.run()
                     sys.exit()
                 self.title  = title

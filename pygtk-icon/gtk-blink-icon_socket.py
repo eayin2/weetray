@@ -8,6 +8,7 @@ import xml.etree.ElementTree as ET
 import elementtree
 import time
 import gtk
+import wnck
 from subprocess import Popen, PIPE, STDOUT
 ''' Using twisted.internet.gtk2reactor to include the gtk app into reactors loop, else
     gtk.main() would block further execution and gtk.main can't be run with subprocess, because
@@ -15,6 +16,8 @@ from subprocess import Popen, PIPE, STDOUT
     After issuing gtk2reactor.install() we just have to set app = icon. Alternatively we could put
     the whole gtk definitions into a class and then run app = classname(). See: http://volteck.net/development/tag/twisted-2/
 '''
+conf = {}
+execfile("/usr/share/weetray/weetray.conf", conf)
 
 def on_right_click(data, event_button, event_time):
     Popen(["/usr/bin/weetray-icon"],stdout=PIPE, stderr=STDOUT, shell=False)
@@ -64,7 +67,7 @@ if __name__ == '__main__':
     icon.connect('activate', on_left_click)
     app = icon
     try:
-        reactor.listenTCP(5008, EchoFactory())
+        reactor.listenTCP(conf["socket_port"], EchoFactory())
     except:
         sys.exit()
     reactor.run()

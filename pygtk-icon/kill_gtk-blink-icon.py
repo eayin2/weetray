@@ -1,6 +1,8 @@
 #!/usr/bin/python2.7
 import sys
 from twisted.internet import reactor, protocol as p
+conf = {}
+execfile("/usr/share/weetray/weetray.conf", conf)
 
 
 class EchoClient(p.Protocol):
@@ -22,5 +24,5 @@ class EchoClientFactory(p.ClientFactory):
     def __init__(self, data):
         self.data = data
 
-reactor.connectTCP('localhost', 5008, EchoClientFactory('exit'))
+reactor.connectTCP('localhost', conf["socket_port"], EchoClientFactory('exit'))
 reactor.run()
