@@ -16,9 +16,6 @@ pkgver() {
   # Use the tag of the last commit
   git describe --long | sed -E 's/([^-]*-g)/r\1/;s/-/./g'
 }
-build() {
-git clone https://github.com/eayin2/weetray.git
-}
 package() {
     cd "${srcdir}/${pkgname}-${pkgver}"
     install -Dm755 bin/weetray "${pkgdir}"/usr/bin/weetray
