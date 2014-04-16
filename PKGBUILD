@@ -1,9 +1,10 @@
+# Maintainer: eayin2 <eayin2 at gmail dot com>
 pkgname="weetray"
 pkgver="0.1"
 pkgrel=1
-license=('GPL')
 pkgdesc="A pytk tray-icon and notifier for weechat"
 arch=('x86_64')
+license=('GPL')
 depends=("xosd" "weechat" "python2" "twisted" "pygtk" "python2-wnck" "xdotool" "screen" "kdebase-konsole" "python2-dbus" "python-elementtree" "python2-notify")
 makedepends=('git')
 source=("${pkgname}-${pkgver}"::'git://github.com/eayin2/weetray.git')
