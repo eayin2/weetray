@@ -5,6 +5,7 @@ pkgrel=1
 pkgdesc="A pytk tray-icon and notifier for weechat"
 arch=('x86_64')
 license=('GPL')
+url="https://github.com/eayin2/weetray"
 depends=("xosd" "weechat" "python2" "twisted" "pygtk" "python2-wnck" "xdotool" "screen" "kdebase-konsole" "python2-dbus" "python-elementtree" "python2-notify")
 makedepends=('git')
 source=("${pkgname}-${pkgver}"::'git://github.com/eayin2/weetray.git')
