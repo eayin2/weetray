@@ -10,19 +10,9 @@ done < $config_file
 IFS="$oldIFS"
 screen -wipe
 if (screen -ls | grep wee | grep Attached); then  # already running, focusing the window with xdotool
-  ncount=0     
-  for line in `qdbus org.kde.konsole /Sessions org.freedesktop.DBus.Introspectable.Introspect | grep "node name"`;do       
-    (( ncount++ ))     
-  done     
-  ncount=$((ncount/2+1))     
-  qdbus org.kde.konsole /Konsole org.kde.konsole.Window.currentSession
-  i=0     
-  for i in `seq $ncount`;do
-    qdbus org.kde.konsole /Konsole org.kde.konsole.Window.moveSessionLeft     
-  done     
-  qdbus org.kde.konsole /Sessions/$session_id org.kde.konsole.Session.runCommand "screen -r wee"
   xdotool search weetray windowactivate
 elif (screen -ls | grep wee | grep Detached); then # already running, attaching with screen -r
+  echo "detached"
   exec 3<>/dev/tcp/localhost/${keys[socket_port]}  # 2>/dev/null
   echo -n "start" >&3
   screen -r wee
