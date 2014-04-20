@@ -16,7 +16,6 @@ elif (screen -ls | grep wee | grep Detached); then
     qdbus org.kde.konsole /Konsole org.kde.konsole.Window.newSession  
     session_id=`qdbus org.kde.konsole /Konsole org.kde.konsole.Window.currentSession`
     qdbus org.kde.konsole /Sessions/$session_id org.kde.konsole.Session.setTitle 1 weetray
-    for `qdbus org.kde.konsole /Sessions org.freedesktop.DBus.Introspectable.Introspect` | grep
     ncount=0
     for line in `qdbus org.kde.konsole /Sessions org.freedesktop.DBus.Introspectable.Introspect | grep "node name"`;do
       (( ncount++ ))
