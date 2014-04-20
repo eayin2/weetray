@@ -1,18 +1,14 @@
 #!/bin/bash
 screen -wipe
 if (screen -ls | grep wee | grep Attached); then
-  echo "already running, focusing the window with xdotool"
   xdotool search weetray windowactivate
 elif (screen -ls | grep wee | grep Detached); then
-  echo "already running, attaching with screen -r"
   if (qdbus org.kde.konsole /Konsole 2>&1 | grep "does not exist" || qdbus org.kde.konsole /Konsole 2>&1 | grep "org.freedesktop.DBus.Error.UnknownObject"); then
-    echo "qdbus org.kde.konsole does not exist"
     kioclient exec /usr/share/weetray/Konsole.desktop
     sleep 1
     session_id=`qdbus org.kde.konsole /Konsole org.kde.konsole.Window.currentSession`
     qdbus org.kde.konsole /Sessions/$session_id org.kde.konsole.Session.runCommand /usr/bin/weetray
   else 
-    echo "qdbus exist"
     qdbus org.kde.konsole /Konsole org.kde.konsole.Window.newSession  
     session_id=`qdbus org.kde.konsole /Konsole org.kde.konsole.Window.currentSession`
     qdbus org.kde.konsole /Sessions/$session_id org.kde.konsole.Session.setTitle 1 weetray
@@ -30,13 +26,11 @@ elif (screen -ls | grep wee | grep Detached); then
 else
   python2.7 /usr/share/weetray/gtk-blink-icon_socket.py &
   if (qdbus org.kde.konsole 2>&1 | grep "does not exist" || qdbus org.kde.konsole /Konsole 2>&1 | grep "org.freedesktop.DBus.Error.UnknownObject"); then
-    echo "qdbus org.kde.konsole does not exist"
     kioclient exec /usr/share/weetray/Konsole.desktop
     sleep 1
     session_id=`qdbus org.kde.konsole /Konsole org.kde.konsole.Window.currentSession`
     qdbus org.kde.konsole /Sessions/$session_id org.kde.konsole.Session.runCommand /usr/bin/weetray
   else 
-    echo "qdbus exist"5
     qdbus org.kde.konsole /Konsole org.kde.konsole.Window.newSession  
     session_id=`qdbus org.kde.konsole /Konsole org.kde.konsole.Window.currentSession`
     qdbus org.kde.konsole /Sessions/$session_id org.kde.konsole.Session.setTitle 1 weetray

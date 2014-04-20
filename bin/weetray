@@ -12,7 +12,6 @@ screen -wipe
 if (screen -ls | grep wee | grep Attached); then  # already running, focusing the window with xdotool
   xdotool search weetray windowactivate
 elif (screen -ls | grep wee | grep Detached); then # already running, attaching with screen -r
-  echo "detached"
   exec 3<>/dev/tcp/localhost/${keys[socket_port]}  # 2>/dev/null
   echo -n "start" >&3
   screen -r wee
