@@ -16,11 +16,16 @@ elif (screen -ls | grep wee | grep Detached); then
     qdbus org.kde.konsole /Konsole org.kde.konsole.Window.newSession  
     session_id=`qdbus org.kde.konsole /Konsole org.kde.konsole.Window.currentSession`
     qdbus org.kde.konsole /Sessions/$session_id org.kde.konsole.Session.setTitle 1 weetray
-# check session count and then make a loop for moveSessionLeft
-    qdbus org.kde.konsole /Konsole org.kde.konsole.Window.moveSessionLeft
-    qdbus org.kde.konsole /Konsole org.kde.konsole.Window.moveSessionLeft 
-    qdbus org.kde.konsole /Konsole org.kde.konsole.Window.moveSessionLeft
-    qdbus org.kde.konsole /Konsole org.kde.konsole.Window.currentSession
+    for `qdbus org.kde.konsole /Sessions org.freedesktop.DBus.Introspectable.Introspect` | grep
+    ncount=0
+    for line in `qdbus org.kde.konsole /Sessions org.freedesktop.DBus.Introspectable.Introspect | grep "node name"`;do
+      (( ncount++ ))
+    done
+    ncount=$((ncount/2+1))
+    i=0
+    for i in `seq $ncount`;do
+      qdbus org.kde.konsole /Konsole org.kde.konsole.Window.moveSessionLeft
+    done
     qdbus org.kde.konsole /Sessions/$session_id org.kde.konsole.Session.runCommand "screen -r wee"
   fi
 else
