@@ -1,5 +1,5 @@
 #!/bin/bash
-config_file="/usr/share/weetray.conf"
+config_file="/usr/share/weetray/weetray.conf"
 declare -A keys
 oldIFS="$IFS"
 IFS=" = "
