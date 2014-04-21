@@ -1,6 +1,5 @@
 # Maintainer: eayin2 <eayin2 at gmail dot com>
 pkgname="weetray"
-pkgver="0.1"
 pkgrel=2
 pkgdesc="A pytk tray-icon and notifier for weechat"
 arch=('x86_64')
