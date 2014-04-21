@@ -1,5 +1,6 @@
 # Maintainer: eayin2 <eayin2 at gmail dot com>
 pkgname="weetray"
+pkgver=1.0
 pkgrel=2
 pkgdesc="A pytk tray-icon and notifier for weechat"
 arch=('x86_64')
@@ -11,10 +12,6 @@ source=("$pkgname-$pkgver"::'git://github.com/eayin2/weetray.git')
 md5sums=('SKIP')
 install='weetray.install'
 
-pkgver() {
-    cd $pkgname-$pkgver
-    git describe --long | sed -E 's/([^-]*-g)/r\1/;s/-/./g'
-}
 package() {
     cd $pkgname-$pkgver
     install -Dm755 bin/weetray "$pkgdir"/usr/bin/weetray
